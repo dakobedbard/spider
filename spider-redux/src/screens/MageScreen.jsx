@@ -1,8 +1,10 @@
 export const MageScreen = () => {
 
     return (
-        <div style={{background: 'orange'}}>
+        <div style={{background: 'blue'}}>
             MageScreen
     </div>
     )
 }
+
+

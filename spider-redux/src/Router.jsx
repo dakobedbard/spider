@@ -2,8 +2,8 @@
 
 import {Routes, Route } from 'react-router-dom';
 import { HomeScreen } from './screens/HomeScreen'
-import  MageScreen  from './screens/MageScreen'
-import  BattleScreen  from './screens/BattleScreen'
+import { MageScreen } from './screens/MageScreen'
+import { BattleScreen } from './screens/BattleScreen'
 
 
 
@@ -11,6 +11,8 @@ const Router = () => {
     return (
       <Routes>
         <Route path ="/" element={<HomeScreen />} />
+        <Route path ="/mage" element={<MageScreen />} />
+        <Route path ="/battle" element={<BattleScreen />} />
       </Routes>
     );
   };

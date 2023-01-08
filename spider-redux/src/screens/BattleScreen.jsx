@@ -1,7 +1,7 @@
 export const BattleScreen = () => {
 
     return (
-        <div style={{background: 'orange'}}>
+        <div style={{background: 'red'}}>
             BattleScreen
     </div>
     )
