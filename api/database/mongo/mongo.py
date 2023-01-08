@@ -14,7 +14,7 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
-class BardDB:
+class Mongo:
     def __init__(self, database):
         self.db = database
 
@@ -57,3 +57,11 @@ class BardDB:
             return self.jsonify(list(cursor))
         except Exception as e:
             log.info('Find did not work')
+
+    def find_by_id(self, document_id, colletion=None):
+        query = {"_id": ObjectId(document_id)}
+        collection = colletion or self.collection
+        try:
+            return self.db[collection].find_one(query)
+        except Exception as ex:
+            log.info(ex)

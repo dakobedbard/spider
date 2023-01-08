@@ -19,7 +19,9 @@ class MageManager:
         fetched_collections = self.MageCollection.find()
         log.warn("FETCHED C {}".format(fetched_collections))
         return fetched_collections
-
+    def get_mage(self, mage_id):
+        mage = self.MageCollection.find_by_id(mage_id)
+        return mage
 
 
 def create_mage():

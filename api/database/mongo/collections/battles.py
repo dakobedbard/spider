@@ -1,15 +1,15 @@
 from api.database.mongo.mongo import Mongo
 
 
-class Mage(Mongo):
+class Battle(Mongo):
     def __init__(self, database):
-        self.collection = 'mage'
+        self.collection = 'battles'
         super().__init__(database)
 
     def insert(self, results):
         return super().insert(results,"job1")
 
-    def create_mage(self, name):
+    def create_battle(self, name):
         doc = {
             'name': name
         }

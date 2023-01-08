@@ -3,9 +3,8 @@
 
 // import { useState } from 'react';
 
-import AddTutorial from "../components/AddTutorial";
-import  Tutorial  from "../components/Tutorial";
-import TutorialsList from "../components/TutorialsList";
+import MageList from '../components/mages/MageList'
+
 
 
 const initialMages = [
@@ -32,11 +31,11 @@ export const MageScreen = () => {
     return (
         <div style={{background: 'blue', marginTop: marginTop}}>
             
-            <TutorialsList />
+            {/* <TutorialsList />
             <Tutorial />
-            <AddTutorial />
+            <AddTutorial /> */}
             
-            
+            <MageList />
             MageScreen
     </div>
     )

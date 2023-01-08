@@ -19,4 +19,8 @@ def get_mages():
     fetched_mages = mage_manager.get_mages()
     return jsonify(fetched_mages)
 
+@api.route('/mages/<mage_id>', methods=['GET'])
+def get_mage(mage_id):
+    mage = mage_manager.get_mage(mage_id)
+    return jsonify(mage)
 

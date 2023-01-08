@@ -9,7 +9,7 @@ const get = id => {
 };
 
 const create = data => {
-  return http.post("/tutorials", data);
+  return http.post("/mages", data);
 };
 
 
@@ -17,10 +17,7 @@ const MageService = {
   getAll,
   get,
   create,
-  update,
-  remove,
-  removeAll,
-  findByTitle
+
 };
 
 export default MageService;

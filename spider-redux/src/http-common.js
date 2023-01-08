@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const URL_PREFIX = "http://api:8080/";
+
 export default axios.create({
-  baseURL: "http://api:8080/api",
+  baseURL: `/api2` + URL_PREFIX,
   headers: {
     "Content-type": "application/json"
   }

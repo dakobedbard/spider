@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import TutorialDataService from "../..//services/TutorialService";
+import MageService from "../..//services/MageService";
 
 const initialState = [];
 
 export const createMage = createAsyncThunk(
   "mages/create",
   async ({ title, description }) => {
-    const res = await TutorialDataService.create({ title, description });
+    const res = await MageService.create({ title, description });
     return res.data;
   }
 );
@@ -14,36 +14,19 @@ export const createMage = createAsyncThunk(
 export const retrieveMages = createAsyncThunk(
   "mages/retrieve",
   async () => {
-    const res = await TutorialDataService.getAll();
+    const res = await MageService.getAll();
     return res.data;
   }
 );
 
 const tutorialSlice = createSlice({
-  name: "tutorial",
+  name: "mage",
   initialState,
   extraReducers: {
-    [createTutorial.fulfilled]: (state, action) => {
+    [createMage.fulfilled]: (state, action) => {
       state.push(action.payload);
     },
-    [retrieveTutorials.fulfilled]: (state, action) => {
-      return [...action.payload];
-    },
-    [updateTutorial.fulfilled]: (state, action) => {
-      const index = state.findIndex(tutorial => tutorial.id === action.payload.id);
-      state[index] = {
-        ...state[index],
-        ...action.payload,
-      };
-    },
-    [deleteTutorial.fulfilled]: (state, action) => {
-      let index = state.findIndex(({ id }) => id === action.payload.id);
-      state.splice(index, 1);
-    },
-    [deleteAllTutorials.fulfilled]: (state, action) => {
-      return [];
-    },
-    [findTutorialsByTitle.fulfilled]: (state, action) => {
+    [retrieveMages.fulfilled]: (state, action) => {
       return [...action.payload];
     },
   },

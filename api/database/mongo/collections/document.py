@@ -1,7 +1,7 @@
-from api.database.mongo.bard_db import BardDB
+from api.database.mongo.mongo import Mongo
 
 
-class Documents(BardDB):
+class Documents(Mongo):
     def __init__(self, database):
         self.collection = 'document'
         super().__init__(database)

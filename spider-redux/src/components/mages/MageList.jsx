@@ -1,27 +1,26 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  retrieveTutorials,
-  findTutorialsByTitle,
-  deleteAllTutorials,
-} from "../redux/slices/tutorials";
+  retrieveMages,
+
+} from "../../redux/slices/mages";
 import { Link } from "react-router-dom";
 
-const TutorialsList = () => {
-  const [currentTutorial, setCurrentTutorial] = useState(null);
+const MagesList = () => {
+  const [currentMage, setCurrentMage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchTitle, setSearchTitle] = useState("");
 
-  const tutorials = useSelector(state => state.tutorials);
+  const mages = useSelector(state => state.mages);
   const dispatch = useDispatch();
 
-  const onChangeSearchTitle = e => {
-    const searchTitle = e.target.value;
-    setSearchTitle(searchTitle);
-  };
+  // const onChangeSearchTitle = e => {
+  //   const searchTitle = e.target.value;
+  //   setSearchTitle(searchTitle);
+  // };
 
   const initFetch = useCallback(() => {
-    dispatch(retrieveTutorials());
+    dispatch(retrieveMages());
   }, [dispatch])
 
   useEffect(() => {
@@ -29,102 +28,50 @@ const TutorialsList = () => {
   }, [initFetch])
 
   const refreshData = () => {
-    setCurrentTutorial(null);
+    setCurrentMage(null);
     setCurrentIndex(-1);
   };
 
-  const setActiveTutorial = (tutorial, index) => {
-    setCurrentTutorial(tutorial);
+  const setActiveMage = (mage, index) => {
+    setCurrentMage(mage);
     setCurrentIndex(index);
   };
-
-  const removeAllTutorials = () => {
-    dispatch(deleteAllTutorials())
-      .then(response => {
-        refreshData();
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
-  const findByTitle = () => {
-    refreshData();
-    dispatch(findTutorialsByTitle({ title: searchTitle }));
-  };
+  const TITLE = 'Mages List'
 
   return (
-    <div className="list row">
-      <div className="col-md-8">
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search by title"
-            value={searchTitle}
-            onChange={onChangeSearchTitle}
-          />
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={findByTitle}
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
+<div className="list row">
       <div className="col-md-6">
-        <h4>Tutorials List</h4>
+        <h4> {TITLE} </h4>
 
         <ul className="list-group">
-          {tutorials &&
-            tutorials.map((tutorial, index) => (
+          {mages &&
+            mages.map((mage, index) => (
               <li
                 className={
                   "list-group-item " + (index === currentIndex ? "active" : "")
                 }
-                onClick={() => setActiveTutorial(tutorial, index)}
+                onClick={() => setActiveMage(mage, index)}
                 key={index}
               >
-                {tutorial.title}
+                {mage.name}
               </li>
             ))}
         </ul>
 
-        <button
-          className="m-3 btn btn-sm btn-danger"
-          onClick={removeAllTutorials}
-        >
-          Remove All
-        </button>
       </div>
       <div className="col-md-6">
-        {currentTutorial ? (
+        {currentMage ? (
           <div>
-            <h4>Tutorial</h4>
+            <h4>Mage</h4>
             <div>
               <label>
-                <strong>Title:</strong>
+                <strong>Name:</strong>
               </label>{" "}
-              {currentTutorial.title}
+              {currentMage.name}
             </div>
-            <div>
-              <label>
-                <strong>Description:</strong>
-              </label>{" "}
-              {currentTutorial.description}
-            </div>
-            <div>
-              <label>
-                <strong>Status:</strong>
-              </label>{" "}
-              {currentTutorial.published ? "Published" : "Pending"}
-            </div>
-
+ 
             <Link
-              to={"/tutorials/" + currentTutorial.id}
+              to={"/mages/" + currentMage.id}
               className="badge badge-warning"
             >
               Edit
@@ -133,12 +80,13 @@ const TutorialsList = () => {
         ) : (
           <div>
             <br />
-            <p>Please click on a Tutorial...</p>
+            <p>Please click on a mage...</p>
           </div>
         )}
       </div>
     </div>
+
   );
 };
 
-export default TutorialsList;
+export default MagesList;
