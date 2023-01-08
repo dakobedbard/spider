@@ -1,0 +1,22 @@
+from flask import Blueprint, request, jsonify, current_app
+import logging
+from api.logic.mages import MageManager
+api = Blueprint("mages_api", __name__)
+log = logging.getLogger()
+
+mage_manager = MageManager()
+
+
+@api.route('/mages', methods=['POST'])
+def create_mage():
+    data = request.get_json()
+    name = data.get('name')
+    mageid = mage_manager.create_mage(name)
+    return mageid
+
+@api.route('/mages', methods=['GET'])
+def get_mages():
+    fetched_mages = mage_manager.get_mages()
+    return jsonify(fetched_mages)
+
+
